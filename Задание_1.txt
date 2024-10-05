@@ -1,0 +1,47 @@
+user@WIN-0L61L2ROLA7 ~
+$ ssh 368c0b00-cfb6-4d06-95f3-412ee9dd5d6d@serverhub.praktikum-services.ru -p 4554
+Enter passphrase for key '/home/user/.ssh/id_ed25519':
+morty@4fa860b7807c:~$ psql -U morty -d scooter_rent
+Password for user morty:
+psql: FATAL:  password authentication failed for user "morty"
+morty@4fa860b7807c:~$ psql -U morty -d scooter_rent
+Password for user morty:
+psql (11.18 (Debian 11.18-0+deb10u1))
+Type "help" for help.
+
+scooter_rent=# SELECT * FROM "Couriers";
+ id | login |           passwordHash           | firstName |         createdAt          |         updatedAt
+----+-------+----------------------------------+-----------+----------------------------+----------------------------
+  1 | ninja | 81dc9bdb52d04dc20036dbd8313ed055 | saske     | 2024-10-05 04:58:04.778+00 | 2024-10-05 04:58:04.778+00
+  2 | n2    | 81dc9bdb52d04dc20036dbd8313ed055 | lili      | 2024-10-05 04:58:04.989+00 | 2024-10-05 04:58:04.989+00
+  3 | n3    | 81dc9bdb52d04dc20036dbd8313ed055 | lussy     | 2024-10-05 04:58:05.109+00 | 2024-10-05 04:58:05.109+00
+  4 | n4    | 81dc9bdb52d04dc20036dbd8313ed055 | nia       | 2024-10-05 04:58:05.264+00 | 2024-10-05 04:58:05.264+00
+  5 | n5    | 81dc9bdb52d04dc20036dbd8313ed055 | marya     | 2024-10-05 04:58:05.424+00 | 2024-10-05 04:58:05.424+00
+(5 rows)
+
+scooter_rent=# SELECT id, "courierId", "firstName", "lastName", "inDelivery" FROM "Orders";
+ id | courierId |    firstName    |    lastName     | inDelivery
+----+-----------+-----------------+-----------------+------------
+  5 |         2 | Naruto          | Uchiha          | t
+  2 |         2 | Naruto          | Uchiha          | t
+  6 |         2 | Naruto          | Uchiha          | t
+  1 |         2 | Naruto          | Uchiha          | t
+  3 |         2 | Абдурахмангаджи | Убдурахмангаджи | t
+  7 |         2 | Абдурахмангаджи | Убдурахмангаджи | t
+ 10 |           | Абдурахмангаджи | Убдурахмангаджи | f
+ 11 |           | Сергей          | Евреевич        | f
+  8 |         3 | Naruto          | Uchiha          | t
+ 12 |         3 | Naruto          | Uchiha          | t
+  4 |         3 | Сергей          | Евреевич        | t
+ 13 |         3 | Сергей          | Евреевич        | t
+  9 |         4 | Naruto          | Uchiha          | t
+ 14 |         4 | Naruto          | Uchiha          | t
+(14 rows)
+
+scooter_rent=# SELECT "Couriers"."login", COUNT("Couriers"."id") FROM "Orders" INNER JOIN "Couriers" ON  "Orders"."courierId" = "Couriers".id Group BY "Couriers"."login";
+ login | count
+-------+-------
+ n4    |     2
+ n2    |     6
+ n3    |     4
+(3 rows)

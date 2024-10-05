@@ -1,0 +1,76 @@
+user@WIN-0L61L2ROLA7 ~
+$ ssh 368c0b00-cfb6-4d06-95f3-412ee9dd5d6d@serverhub.praktikum-services.ru -p 4554
+Enter passphrase for key '/home/user/.ssh/id_ed25519':
+morty@4fa860b7807c:~$ psql -U morty -d scooter_rent
+Password for user morty:
+psql (11.18 (Debian 11.18-0+deb10u1))
+Type "help" for help.
+
+scooter_rent=#  SELECT "track","finished","cancelled","inDelivery" FROM "Orders";
+ track  | finished | cancelled | inDelivery
+--------+----------+-----------+------------
+ 870973 | f        | f         | t
+ 620882 | f        | f         | t
+ 620882 | f        | f         | t
+ 870973 | t        | f         | t
+ 277479 | f        | f         | t
+ 277479 | f        | f         | t
+ 724434 | f        | f         | f
+ 678237 | f        | f         | f
+ 502047 | f        | f         | t
+ 502047 | f        | f         | t
+ 978203 | f        | f         | t
+ 978203 | f        | f         | t
+ 806346 | f        | f         | t
+ 806346 | f        | f         | t
+ 762847 | f        | f         | f
+ 239832 | f        | f         | t
+ 239832 | f        | f         | t
+(17 rows)
+
+scooter_rent=# SELECT track, CASE WHEN "finished" = true THEN 2WHEN "cancelled" = true THEN -1 WHEN "inDelivery" = true THEN 1 END FROM "Orders";
+ track  | case
+--------+------
+ 870973 |    1
+ 620882 |    1
+ 620882 |    1
+ 870973 |    2
+ 277479 |    1
+ 277479 |    1
+ 724434 |
+ 678237 |
+ 502047 |    1
+ 502047 |    1
+ 978203 |    1
+ 978203 |    1
+ 806346 |    1
+ 806346 |    1
+ 762847 |
+ 239832 |    1
+ 239832 |    1
+(17 rows)
+
+scooter_rent=# SELECT track,"finished","cancelled","inDelivery", CASE WHEN "finished" = true THEN 2 WHEN "cancelled" = true THEN -1 WHEN "inDelivery" = true THEN 1 END FROM "Orders";
+ track  | finished | cancelled | inDelivery | case
+--------+----------+-----------+------------+------
+ 870973 | f        | f         | t          |    1
+ 620882 | f        | f         | t          |    1
+ 620882 | f        | f         | t          |    1
+ 870973 | t        | f         | t          |    2
+ 277479 | f        | f         | t          |    1
+ 277479 | f        | f         | t          |    1
+ 724434 | f        | f         | f          |
+ 678237 | f        | f         | f          |
+ 502047 | f        | f         | t          |    1
+ 502047 | f        | f         | t          |    1
+ 978203 | f        | f         | t          |    1
+ 978203 | f        | f         | t          |    1
+ 806346 | f        | f         | t          |    1
+ 806346 | f        | f         | t          |    1
+ 762847 | f        | f         | f          |
+ 239832 | f        | f         | t          |    1
+ 239832 | f        | f         | t          |    1
+(17 rows)
+
+scooter_rent=# ^C
+scooter_rent=# ~

@@ -1,0 +1,34 @@
+user@WIN-0L61L2ROLA7 ~
+$ ssh-keygen
+Generating public/private ed25519 key pair.
+Enter file in which to save the key (/home/user/.ssh/id_ed25519):
+/home/user/.ssh/id_ed25519 already exists.
+Overwrite (y/n)? y
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in /home/user/.ssh/id_ed25519
+Your public key has been saved in /home/user/.ssh/id_ed25519.pub
+The key fingerprint is:
+SHA256:V5zjE9KzY4MmB1lSh5FuUrEE4F6RNlXurtzIDhlPuWU user@WIN-0L61L2ROLA7
+The key's randomart image is:
++--[ED25519 256]--+
+|      ..+=B*o    |
+|     .  +*+* .   |
+|      ..++o X    |
+|     . ...oB =   |
+|      . SoB E    |
+|         X * +   |
+|        o o .    |
+|         + +     |
+|         .* .    |
++----[SHA256]-----+
+
+user@WIN-0L61L2ROLA7 ~
+$ ssh 9572e91b-2f2f-48f2-bf4f-7d58e973c5a5@serverhub.praktikum-services.ru -p 4554
+Enter passphrase for key '/home/user/.ssh/id_ed25519':
+morty@ce0ec411268d:~$ psql -U morty -d scooter_rent
+Password for user morty:
+psql (11.18 (Debian 11.18-0+deb10u1))
+Type "help" for help.
+
+scooter_rent=#
