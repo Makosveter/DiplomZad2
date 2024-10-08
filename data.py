@@ -1,25 +1,25 @@
 # Тела POST-запросов.
 
-# заголовки для HTTP-запроса, указывающие на то, что тело запроса будет в формате JSON
-import configuration
+# URL_SERVICE хранит базовый URL веб-сервиса, который используется для доступа к API или другим ресурсам.
+URL_SERVICE             = "https://40df7b2e-8a47-4abc-aebe-fd4d846541fd.serverhub.praktikum-services.ru"
+URL_CREATE_ORDERS_PATH  = "/api/v1/orders"
+URL_TRACK               = "/v1/orders/track?t="
 
-headers = {
-    "Content-Type": "application/json"
+track       = "000000"
+
+headers = {"Content-Type": "application/json"}
+
+# Данные заказа. Для создания новой записи заказа в системе.
+orders_body = {
+    "firstName": "Сергей",                  # - Имя клиента
+    "lastName": "Абдурахмангаджи",                 # - Фамилия клиента
+    "address": "169710",                    # - Адрес доставки
+    "metroStation": "40",                   # - Номер станции метро
+    "phone": "+34916123451",                # - Телефон
+    "rentTime": 5,                          # - На сколько дней аренда самоката
+    "deliveryDate": "2024-10-07",           # - Дата аренды
+    "comment": "Привет, Абдурахмангаджи!",  # - Комментарии
+    "color": ["BLACK", "GREY"]              # - Цвета самоката, подходящие клиенту.
     }
 
-# Данные пользователя. Для создания новой записи пользователя в системе.
-user_body = {
-    "firstName": "Анатолий",  # Имя пользователя
-    "phone": "+79995553322",  # Контактный телефон пользователя
-    "address": "г. Москва, ул. Пушкина, д. 10"  # Адрес пользователя
-    }
-
-kit_headers = {
-    "Content-Type": "application/json",
-    "Authorization": "Bearer f6f5f89f-e7f2-4f81-ac96-bff37b6f796c"
-    }
-
-kit_body = {
-    "name": "Новый набор"
-    }
-
+track_1 = 0
